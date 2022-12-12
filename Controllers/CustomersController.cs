@@ -135,5 +135,12 @@ namespace SPViewLoadWebAPIRemoteDBDotNet6Core.Controllers
         {
             return await _context.GetProcedures().CustOrdersDetailAsync(orderId);
         }
+
+        // Loading data from a view
+        [HttpGet("CustomerAndSuppliersByCity")]
+        public async Task<IEnumerable<CustomerAndSuppliersByCity>> CustomerAndSuppliersByCity()
+        {
+            return await _context.CustomerAndSuppliersByCities.ToListAsync();
+        }
     }
 }
