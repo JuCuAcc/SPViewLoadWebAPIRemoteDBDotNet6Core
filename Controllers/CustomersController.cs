@@ -128,5 +128,12 @@ namespace SPViewLoadWebAPIRemoteDBDotNet6Core.Controllers
 
             return customer == null ? NotFound() : customer;
         }
+
+        // Loading data from stored procedure = 10248
+        [HttpGet("CustOrdersDetailAsync")]
+        public async Task<IEnumerable<CustOrdersDetailResult>> CustOrdersDetailAsync(int? orderId)
+        {
+            return await _context.GetProcedures().CustOrdersDetailAsync(orderId);
+        }
     }
 }
