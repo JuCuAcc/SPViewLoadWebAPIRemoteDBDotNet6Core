@@ -16,6 +16,10 @@ builder.Services.AddDbContext<NorthwindContext>(
         options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindDB")); 
     });
 
+// Resolving Nested Object Issue
+builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
+    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

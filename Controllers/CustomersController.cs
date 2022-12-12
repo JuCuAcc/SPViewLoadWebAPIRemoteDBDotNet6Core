@@ -116,5 +116,17 @@ namespace SPViewLoadWebAPIRemoteDBDotNet6Core.Controllers
         {
             return _context.Customers.Any(e => e.CustomerId == id);
         }
+
+        // Loading related Data
+        [HttpGet("GetCustomerOrders")]
+        public async Task<ActionResult<Customer>> GetCustomerOrders(string customerId)
+        {
+            var customer = await _context.Customers
+                .Where(e => e.CustomerId == customerId)
+                .Include(c => c.Orders)
+                .FirstOrDefaultAsync();
+
+            return customer == null ? NotFound() : customer;
+        }
     }
 }
